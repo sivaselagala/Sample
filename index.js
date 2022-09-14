@@ -10,7 +10,7 @@ pwd = process.env.PASSWORD
 
 var config = {
   method: 'post',
-  url: 'https://tenant.callidusondemand.com/TrueComp-SaaS/services/rest/touchlessdeployment/update?changeMasterFile=TouchLess.xml',
+  url: 'https://1750.callidusondemand.com/TrueComp-SaaS/services/rest/touchlessdeployment/update?changeMasterFile=TouchLess.xml',
   auth: {
   username: username,
   password: pwd,
