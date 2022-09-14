@@ -1,0 +1,35 @@
+# This is a basic workflow that is manually triggered
+name: Node-CICD Touchless Deloyment SQL's
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Touchless Deployment'
+        # Default value if no value is explicitly provided
+        default: 'SAP Commissions'
+        # Input has to be provided for the workflow to run
+        required: true
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  DeploySQL:
+    name: Build
+    environment: TOKEN
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Read python version from a file
+      - run: sudo apt install zip unzip
+      - run: zip -r liquibase.zip TouchLess.xml CBATEST
+      - run: npm i axios
+      - run: node index.js
+        env:
+          TENANT: ${{secrets.TENANT }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
